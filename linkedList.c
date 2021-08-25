@@ -107,6 +107,72 @@ void insertAtPosition() {
     printf("\nSuccessfully inserted %d at the position : %d of the list", newNode->data, pos);
 }
 
+void deleteFromBeginning() {
+
+    curNode = head;
+
+    int deletedData;
+
+    if(head == 0) {
+        printf("\nList is empty");
+    }
+    else {
+        head = curNode->next;
+        deletedData = curNode->data;
+        free(curNode);
+    }
+
+    printf("\nSuccessfully deleted %d from the beginning of the list", deletedData);
+    
+}
+
+void deleteFromEnd() {
+
+    node *prevNode = head;
+    curNode = head;
+    int deletedData;
+
+    while(curNode->next != 0) {
+        prevNode = curNode;
+        curNode = curNode->next;
+    }
+
+    prevNode->next = 0;
+    deletedData = curNode->data;
+
+    free(curNode);
+
+    printf("\nSuccessfully deleted %d from the end of the list", deletedData);
+
+}
+
+void deleteFromPosition() {
+
+    printf("\nEnter the position -> ");
+    int pos;
+    scanf("%d", &pos);
+
+    curNode = head;
+    node *prevNode = head;
+
+    int i = 1, deletedData;
+
+    while(i < pos) {
+        prevNode = curNode;
+        curNode = curNode->next;   
+        i++;
+    }
+
+    prevNode->next = curNode->next;
+
+    deletedData = curNode->data;
+
+    free(curNode);
+
+    printf("\nSuccessfully deleted %d from the position : %d of the list", deletedData, pos);
+    
+}
+
 int main() {
 
     head = 0;
@@ -144,6 +210,7 @@ int main() {
         printf("\nEnter 1 to print the list");
         printf("\nEnter 2 to print the length of the list");
         printf("\nEnter 3 to add a node");
+        printf("\nEnter 4 to delete a node");
 
         printf("\n\nEnter your choice -> ");
         scanf("%d", &choice);
@@ -168,7 +235,7 @@ int main() {
 
                 printf("\nEnter 1 to insert node at the beginning");
                 printf("\nEnter 2 to insert node at the end");
-                printf("\nEnter 3 to insert node at the a position");
+                printf("\nEnter 3 to insert node at a position");
 
                 int choice2;
 
@@ -194,6 +261,36 @@ int main() {
                 
                 break;
 
+            case 4:
+                system("cls");
+
+                printf("\nEnter 1 to delete node from the beginning");
+                printf("\nEnter 2 to delete node from the end");
+                printf("\nEnter 3 to delete node from a position");
+
+                int choice3;
+
+                printf("\nEnter your choice -> ");
+                scanf("%d", &choice3);
+
+                switch(choice3) {
+
+                    case 1:
+                        deleteFromBeginning();
+                        break;
+                    case 2:
+                        deleteFromEnd();
+                        break;
+                    case 3:
+                        deleteFromPosition();
+                        break;
+                    default:
+                        printf("\nWrong choice entered!!");
+                    
+                }
+
+                break;
+                
             default:
                 printf("\nEnter appropriate choice!!");
             
